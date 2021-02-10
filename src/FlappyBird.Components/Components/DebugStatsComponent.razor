@@ -1,0 +1,53 @@
+﻿@using System.Numerics
+@if (Engine != null)
+{
+    <Debug>
+        <div class="debug-stats">
+            <div>
+                Active Hurdles: @ActiveHurdles, Bird Collision:@BirdCollision , Bird Velocity:@Bird.Velocity.ToString()
+            </div>
+            <div>
+                Hurdle vel:@Engine.Scene.HurdleGenerator.NewHurdleVelocity
+            </div>
+
+            <div>
+                <input type="range" value="@hurdleVelocity" min="-50" max="-5" @onchange="SetHurdleVelocity"/>
+            </div>
+
+        </div>
+
+    </Debug>
+}
+
+
+@code
+{
+
+    private Bird Bird => Engine?.Scene?.GetGameObjects<Bird>().FirstOrDefault();
+    public int ActiveHurdles => Engine?.Scene?.GetGameObjects<Hurdle>().Count() ?? 0;
+    public int BirdCollision => Bird?.Collissions ?? 0;
+
+    [CascadingParameter]
+    public GameEngine Engine { get; set; }
+
+    readonly int hurdleVelocity = 0;
+
+    private void ToggleDebug()
+    {
+        if (Engine != null)
+        {
+            Engine.Debug = !Engine.Debug;
+        }
+    }
+
+    public void SetHurdleVelocity(ChangeEventArgs evt)
+    {
+        var hurdles = Engine.Scene.GetGameObjects<Hurdle>();
+        var f = float.Parse(evt.Value.ToString());
+        foreach (var hurdle in hurdles)
+        {
+            hurdle.SetVelocity(new Vector2(f, 0));
+        }
+        Engine.Scene.HurdleGenerator.NewHurdleVelocity = new Vector2(f, 0);
+    }
+}

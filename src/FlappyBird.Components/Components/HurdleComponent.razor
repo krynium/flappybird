@@ -1,0 +1,49 @@
+﻿@inherits GameComponent
+
+@if (GameObject is Hurdle hurdle)
+{
+    var topPipe = hurdle.TopPipe;
+    var bottomPipe = hurdle.BottomPipe;
+
+    var hurdleStyle = $@"
+    left:{hurdle.Position.X}px;
+    top:{hurdle.Position.Y}px;
+    height:{hurdle.Size.Height}px;
+    width:{hurdle.Size.Width}px;
+    bottom:{hurdle.Position.X + GameObject.Size.Height}px; ";
+
+    var topStyle = $@"
+    left:0px;
+    top:{topPipe.Position.Y}px;
+    height:{topPipe.Size.Height}px;
+    width:{topPipe.Size.Width}px";
+
+    var bottomStyle = $@"
+    left:0px;
+    top:{bottomPipe.Position.Y}px;
+    height:{bottomPipe.Size.Height}px;
+    width:{bottomPipe.Size.Width}px";
+
+    <div class="hurdle" style="@hurdleStyle">
+
+        <div class="top" style="@topStyle">
+            <Debug>
+                <div style="transform: scaleY(-1)">
+                    Id=@hurdle.Id, 
+                    x=@topPipe.Position.X,y=@topPipe.Position.Y h:@topPipe.Size.Height, w:@topPipe.Size.Width
+                </div>
+            </Debug>
+
+
+        </div>
+        <div class="bottom" style="@bottomStyle">
+            <Debug>
+
+                x=@bottomPipe.Position.X,y=@bottomPipe.Position.Y h:@bottomPipe.Size.Height, w:@bottomPipe.Size.Width
+
+            </Debug>
+
+
+        </div>
+    </div>
+}

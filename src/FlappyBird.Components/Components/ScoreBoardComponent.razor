@@ -1,0 +1,38 @@
+﻿@if (Engine != null)
+{
+    <div class="score-board">
+        <div class="score">
+            @foreach (var digit in GetScoreDigits())
+            {
+                <div class="score-digit-@digit"></div>
+            }
+        </div>
+    </div>
+}
+
+
+@code
+{
+
+    private Bird Bird => Engine?.Scene?.GetGameObjects<Bird>().FirstOrDefault();
+    public int ActiveHurdles => Engine?.Scene?.GetGameObjects<Hurdle>().Count() ?? 0;
+    public int BirdCollision => Bird?.Collissions ?? 0;
+    public int Score => Bird?.Score ?? 0;
+
+    [CascadingParameter]
+    public GameEngine Engine { get; set; }
+
+    private void ToggleDebug()
+    {
+        if (Engine != null)
+        {
+            Engine.Debug = !Engine.Debug;
+        }
+    }
+
+    public IEnumerable<char> GetScoreDigits()
+    {
+        return Score.ToString("0");
+    }
+
+}

@@ -1,0 +1,18 @@
+﻿.bird {
+  position:absolute;
+  z-index:100;
+  
+  &.blue {
+    &.down-flap {
+      background-image: url("../birds/bluebird-downflap.png");
+    }
+
+    &.mid-flap {
+      background-image: url("../birds/bluebird-midflap.png");
+    }
+
+    &.up-flap {
+      background-image: url("../birds/bluebird-upflap.png");
+    }
+  }
+}

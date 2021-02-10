@@ -1,0 +1,22 @@
+﻿.score-board {
+  padding: 4px;
+  position: absolute;
+  right: 2px;
+  top: 2px;
+  z-index: 1;
+
+ 
+}
+.score {
+  height: 36px;
+  display: flex;
+  justify-content: start;
+
+  @for $i from 0 through 9 {
+    .score-digit-#{$i} {
+      background-image: url("digits/#{$i}.png");
+      background-repeat: no-repeat;
+      width: 24px;
+    }
+  }
+}

@@ -1,0 +1,14 @@
+﻿@if (Engine?.Debug ?? false)
+{
+    @ChildContent
+}
+
+@code
+{
+
+    [CascadingParameter]
+    public GameEngine Engine { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+}

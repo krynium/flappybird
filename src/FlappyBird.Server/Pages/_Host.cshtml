@@ -1,0 +1,29 @@
+﻿@page "/"
+@namespace FlappyBird.Server.Pages
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Game</title>
+    <base href="~/"/>
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
+    <link href="dist/site.css" rel="stylesheet"/>
+    <link href="_content/FlappyBird.Components/dist/game.css" rel="stylesheet" />
+</head>
+<body>
+<app>
+    <component type="typeof(App)" render-mode="Server"/>
+</app>
+
+<script src="_framework/blazor.server.js"></script>
+<script src="_content/FlappyBird.Components/game.js" ></script>
+
+</body>
+
+</html>

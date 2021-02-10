@@ -1,0 +1,39 @@
+﻿@using System.Numerics
+@if (Engine.IsGameOver)
+{
+    <style>
+        .score-label {
+            font-weight: 800;
+            font-size: 3em;
+            text-transform: uppercase;
+            color: #763522;
+        }
+    </style>
+    <div class="game-over">
+        <div class="score-label">Score</div>
+        <div class="score">
+            @foreach (var digit in GetScoreDigits())
+            {
+                <div class="score-digit-@digit"></div>
+            }
+        </div>
+        <div>
+            <small>Press 'R' to restart game</small>
+        </div>
+    </div>
+}
+
+
+@code
+{
+
+   
+    [CascadingParameter]
+    public GameEngine Engine { get; set; }
+    private Bird Bird => Engine?.Scene?.GetGameObjects<Bird>().FirstOrDefault();
+    public int Score => Bird?.Score ?? 0;
+    public IEnumerable<char> GetScoreDigits()
+    {
+        return Score.ToString("0");
+    }
+}

@@ -1,0 +1,23 @@
+﻿@inherits GameComponent
+
+@{
+    var style = $@"
+        left:{GameObject.Position.X}px;
+        top:{GameObject.Position.Y}px;
+        height:{GameObject.Size.Height}px;
+        width:{GameObject.Size.Width}px;";
+
+}
+    <div class="game-scene-container">
+        <div class="brick"></div>
+        <ScoreBoardComponent />
+        <GameOverComponent />
+        <div class="scene" style="@style">
+            @foreach (var obj in GameObject.GetChildrens())
+            {
+                @obj.RenderComponent()
+            }
+        </div>
+        <div class="brick"></div>
+
+    </div>

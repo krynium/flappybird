@@ -1,0 +1,34 @@
+﻿@inherits GameComponent
+
+@{
+    var xdirection = Bird.XDirection == BirdDirection.Backward
+        ? "rotateY(180deg)" : "scale(1)";
+
+    var ydirection = Bird.YDirection == BirdDirection.Backward
+        ? "rotate(-12deg)" : "rotate(12deg)";
+
+    var birdStyle = $@"
+    left: {Bird.Position.X}px;
+    top: {Bird.Position.Y}px;
+    width: {Bird.Size.Width}px;
+    height: {Bird.Size.Height}px;
+    transform: {ydirection} 
+    "; //transform:scale({(1+Bird.Mass)/Bird.Mass})
+}
+<div style="@birdStyle"
+     class="bird blue down-flap @Bird.FlapPosition">
+
+    <Debug>
+        <span style="color: white">
+            @Bird.Position.ToString(),
+            vel:@Bird.Velocity.ToString()
+        </span>
+    </Debug>
+
+</div>
+
+@code
+{
+    private Bird Bird => GameObject as Bird;
+
+}

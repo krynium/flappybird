@@ -1,0 +1,44 @@
+﻿@inject IJSRuntime JsRuntime
+@inherits GameComponent
+@implements IDisposable
+
+<div tabindex="0" class="game-loop" @ref="container" @onkeydown="KeyDown">
+
+    <CascadingValue Value="@engine">
+        @engine.Scene.RenderComponent()
+        <DebugStatsComponent/>
+    </CascadingValue>
+
+</div>
+
+
+@code
+{
+    private GameEngine engine;
+    private ElementReference container;
+
+    protected override void OnInitialized()
+    {
+        engine = new GameEngine(this);
+        base.OnInitialized();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JsRuntime.InvokeVoidAsync("focusGameComponent", container);
+            engine.Start();
+        }
+    }
+
+    public void Dispose()
+    {
+        engine?.Stop();
+    }
+
+    private void KeyDown(KeyboardEventArgs obj)
+    {
+        engine?.PushKeyboardEvents(obj);
+    }
+}
