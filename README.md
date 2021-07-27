@@ -1,4 +1,4 @@
 # flappybird
 mvvm architecture
 serverside,
-basic physica
+basic physics
